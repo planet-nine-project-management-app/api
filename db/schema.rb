@@ -43,9 +43,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_07_155420) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name"
+    t.string "jti", default: "4278e849-c364-4531-bc09-5c5405351ced", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
