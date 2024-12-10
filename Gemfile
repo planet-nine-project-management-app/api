@@ -12,7 +12,7 @@ gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem "jbuilder"
+gem "jbuilder", '~> 2.13.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -35,9 +35,25 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
 
+# dot env to access secret keys
+gem 'dotenv-rails', '~> 2.8.1'
+
+# For authentication
+gem 'devise', '~> 4.9.4'
+
+# For authentication token
+gem 'jwt', '~> 2.9.3'
+
+# For authorization
+gem 'pundit', '~> 2.4.0'
+
+# For Api calls whitelisting
+gem 'rack-cors', '~> 2.0.2'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'byebug', '~> 11.1.3'
 end
 
 group :development do
