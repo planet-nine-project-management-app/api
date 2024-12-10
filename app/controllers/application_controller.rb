@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   include ExceptionHandler
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :set_default_format
 
   def authenticate_user!
     header = request.headers['Authorization']
@@ -10,5 +10,11 @@ class ApplicationController < ActionController::API
     @current_user = User.find(decoded['id'])
 
     raise ExceptionHandler::InvalidAccess, "Invalid token" if @current_user.jti != decoded['jti']
+  end
+
+  private
+
+  def set_default_format
+    request.format = :json
   end
 end

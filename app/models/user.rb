@@ -7,6 +7,8 @@ class User < ApplicationRecord
   # Callback to ensure jti is generated for new users
   before_create :generate_jti
 
+  has_many :projects
+
   # Generates a JWT with the current `jti` value
   def generate_jwt
     JWT.encode(
@@ -17,6 +19,10 @@ class User < ApplicationRecord
       },
       ENV['SECRET_KEY_BASE']
     )
+  end
+
+  def valid_password?(password)
+    super || raise(ExceptionHandler::InvalidAccess, 'Invalid email or password')
   end
 
    # Regenerates the `jti` to invalidate old tokens
