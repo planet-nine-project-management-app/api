@@ -3,15 +3,11 @@
 one:
   name: MyString
   description: MyText
-  due_date: 2024-12-11
-  status: MyString
-  user: one
-  project: one
+  theme: MyString
+  logo_url: MyString
 
 two:
   name: MyString
   description: MyText
-  due_date: 2024-12-11
-  status: MyString
-  user: two
-  project: two
+  theme: MyString
+  logo_url: MyString
