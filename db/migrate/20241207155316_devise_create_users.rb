@@ -33,12 +33,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       # t.datetime :locked_at
 
       t.string :name
+      t.integer :role, null: false
       t.string :jti, null: false, default: SecureRandom.uuid
 
       t.timestamps null: false
     end
 
     add_index :users, :email,                unique: true
+    add_index :users, :role
     add_index :users, :reset_password_token, unique: true
     add_index :users, :jti, unique: true
 

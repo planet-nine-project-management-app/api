@@ -4,12 +4,28 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # Callback to ensure jti is generated for new users
-  before_create :generate_jti
+  # -----------------------------------------------
+  # RELATIONSHIPS
+  # -----------------------------------------------
+  has_many :user_projects
+  has_many :projects, through: :user_projects
+  has_many :deliverables
+  has_many :comments
 
-  has_many :projects
+  # -----------------------------------------------
+  # VALIDATIONS
+  # ------------------------------------------------
+  validates :name, :email, :role, presence: true
+  validates :email, uniqueness: true
 
-  # Generates a JWT with the current `jti` value
+  # -----------------------------------------------
+  # ENUMS
+  # ------------------------------------------------
+  enum role: ::USER_ROLES
+
+  # -----------------------------------------------
+  # INSTANCE METHODS
+  # ------------------------------------------------
   def generate_jwt
     JWT.encode(
       {
@@ -25,15 +41,7 @@ class User < ApplicationRecord
     super || raise(ExceptionHandler::InvalidAccess, 'Invalid email or password')
   end
 
-   # Regenerates the `jti` to invalidate old tokens
-   def invalidate_jwt!
+  def invalidate_jwt!
     update!(jti: SecureRandom.uuid)
-  end
-
-  private
-
-  # Generates a unique `jti` for the user
-  def generate_jti
-    self.jti ||= SecureRandom.uuid
   end
 end
