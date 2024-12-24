@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :projects, through: :user_projects
   has_many :deliverables
   has_many :comments
+  has_many :roles
 
   # -----------------------------------------------
   # VALIDATIONS
