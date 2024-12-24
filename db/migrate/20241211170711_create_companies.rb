@@ -5,7 +5,7 @@ class CreateCompanies < ActiveRecord::Migration[7.1]
       t.text :description
       t.string :theme
       t.string :logo_url
-
+      t.string :tenant_id, null: false  
       t.timestamps
     end
 
