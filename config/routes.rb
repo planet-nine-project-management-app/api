@@ -7,22 +7,17 @@ Rails.application.routes.draw do
         post "sign_up", to: "users/registrations#create"
         post "sign_in", to: "users/sessions#create"
         delete "sign_out", to: "users/sessions#sign_out"
-      end
-      resources :projects do
-        resources :deliverables
-        resources :user_projects, only: [:index, :create, :destroy]
-      end
+      end        
+
       resources :companies do
-        resources :projects, only: [:index]
+        resources :projects do
+          resources :deliverables
+        end
       end
 
-      resources :users do
-        resources :roles, only: [:index] # Fetch roles assigned to a user
-        resources :permissions, only: [:index] # Fetch permissions assigned to a user
-      end
-
-      resources :user_projects
-      resources :images # Polymorphic association for handling images
+      resources :users, only: [:update]
+      resources :roles, only: [:index]
+      resources :permissions, only: [:index]
     end
   end
 

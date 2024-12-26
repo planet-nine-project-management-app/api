@@ -1,5 +1,4 @@
 class Api::V1::CompaniesController < ApplicationController
-  
     before_action :find_company, only: [:show, :destroy, :update]
 
     def index
@@ -18,9 +17,8 @@ class Api::V1::CompaniesController < ApplicationController
     end
 
     def update
-        @company.update(company_params)
+        @company.update!(company_params)
     end
-      
 
     private
 
@@ -31,6 +29,5 @@ class Api::V1::CompaniesController < ApplicationController
     def find_company
         @company = Company.find(params[:id])
     end
-
-
+    
 end
