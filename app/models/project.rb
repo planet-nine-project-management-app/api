@@ -6,6 +6,7 @@ class Project < ApplicationRecord
   has_many :users, through: :user_projects
   has_many :deliverables
   belongs_to :company
+  has_many :images, as: :imageable
 
   # -----------------------------------------------
   # VALIDATIONS

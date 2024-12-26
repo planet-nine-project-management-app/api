@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :deliverables
   has_many :comments
   has_many :roles
+  has_many :permissions
+  has_many :images, as: :imageable
 
   # -----------------------------------------------
   # VALIDATIONS

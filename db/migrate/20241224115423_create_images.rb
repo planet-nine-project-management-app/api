@@ -8,6 +8,5 @@ class CreateImages < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    # add_index :images, [:imageable_id, :imageable_type]
   end
 end

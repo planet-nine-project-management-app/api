@@ -12,7 +12,6 @@ class CreateProjects < ActiveRecord::Migration[7.1]
     end
 
     add_index :projects, :name
-    # add_index :projects, [:company_id]
     add_index :projects, :status
   end
 end

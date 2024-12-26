@@ -14,6 +14,5 @@ class CreateDeliverables < ActiveRecord::Migration[7.1]
 
     add_index :deliverables, :name
     add_index :deliverables, :status
-    # add_index :deliverables, [:user_id, :project_id]
   end
 end

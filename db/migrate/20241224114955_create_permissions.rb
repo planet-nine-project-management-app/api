@@ -8,6 +8,5 @@ class CreatePermissions < ActiveRecord::Migration[7.1]
       t.references :user, null: false, foreign_key: true
     end
 
-    # add_index :permissions, [:user_id]
   end
 end
