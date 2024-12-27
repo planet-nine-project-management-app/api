@@ -12,6 +12,11 @@ class User < ApplicationRecord
   has_many :deliverables
   has_many :comments
   has_many :roles
+  has_many :permissions
+  has_one_attached :profile_picture # Active Storage
+  has_one :image, as: :imageable, dependent: :destroy # Polymorphic association (if needed for additional metadata)
+
+  accepts_nested_attributes_for :image, allow_destroy: true
 
   # -----------------------------------------------
   # VALIDATIONS

@@ -1,28 +1,35 @@
 class Api::V1::ProjectsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_company
 
   def index
-    projects = @current_user.projects
-    render json: projects
+    @projects = @company.projects
   end
 
   def show
-    project = current_user.projects.find(params[:id])
-    render json: project
+    @project = @company.projects.find(params[:id])
   end
 
   def create
-    project = current_user.projects.new(project_params)
-    if project.save
-      render json: project, status: :created
-    else
-      render json: project.errors, status: :unprocessable_entity
-    end
+    @project = @company.projects.create!(project_params)
+  end
+
+  def destroy
+    @company.projects.find(params[:id]).destroy!
+  end
+
+  def update
+    @company.projects.find(params[:id]).update!(project_params)
   end
 
   private
 
+  def set_company
+    @company = Company.find(params[:company_id])
+  end
+
   def project_params
-    params.require(:project).permit(:name, :description, :start_date, :end_date, :status)
+    params.require(:project).permit(:name, :tenant_id, :description, :start_date, :end_date, :status, 
+      attachments: [], # For Active Storage
+      images_attributes: [:id, :file_name, :byte_size, :file_type, :_destroy]) # Nested attributes
   end
 end
